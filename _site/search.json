@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "jumper2",
+    "title": "jumper does code blog",
     "section": "",
-    "text": "Post With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 28, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Looking for the monopole\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAndy writes some markup for a post\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 29, 2025\n\n\nJumperAMC\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 28, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -18,7 +18,7 @@
     "href": "about.html",
     "title": "About",
     "section": "",
-    "text": "About this blog"
+    "text": "About this blog - Andy adds some text to see if the update goes live."
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -26,5 +26,26 @@
     "title": "Welcome To My Blog",
     "section": "",
     "text": "This is the first post in a Quarto blog. Welcome!\n\nSince this post doesn’t specify an explicit image, the first image in the post will be used in the listing page of posts."
+  },
+  {
+    "objectID": "posts/Andys-first-post/index.html",
+    "href": "posts/Andys-first-post/index.html",
+    "title": "Andy writes some markup for a post",
+    "section": "",
+    "text": "Does my image show up? Oddly not yet\ndoes this code show up? #| label: fig-polar #| fig-cap: “A line plot on a polar axis” import numpy as np import matplotlib.pyplot as plt r = np.arange(0, 2, 0.01) theta = 2 * np.pi * r fig, ax = plt.subplots( subplot_kw = {‘projection’: ‘polar’} ) ax.plot(theta, r) ax.set_rticks([0.5, 1, 1.5, 2]) ax.grid(True) plt.show()"
+  },
+  {
+    "objectID": "posts/Andys-first-post/Magnetometry_work_web.html",
+    "href": "posts/Andys-first-post/Magnetometry_work_web.html",
+    "title": "Looking for the monopole",
+    "section": "",
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.signal import find_peaks\n\n# Generate example magnetometry data (replace with your own data)\nx = np.linspace(0, 10, 1000)\ny = np.sin(x) + np.random.normal(0, 0.1, size=len(x))\n\n# Smooth the data to reduce noise (optional)\nsmoothed_y = np.convolve(y, np.ones(10)/10, mode='same')\n\n# Find peaks in the data\npeaks, _ = find_peaks(smoothed_y, prominence=0.1, distance=50)\n\n# Plot the magnetometry data with detected peaks\nplt.figure(figsize=(8, 6))\nplt.plot(x, y, label='Raw Data')\nplt.plot(x, smoothed_y, label='Smoothed Data')\nplt.plot(x[peaks], y[peaks], 'ro', markersize=8, label='Detected Peaks')\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.legend()\nplt.title('Magnetometry Data with Detected Peaks')\nplt.grid(True)\nplt.show()\n\n# Analyze spot characteristics from the detected peaks\nif len(peaks) &gt; 0:\n    print(\"Number of detected peaks:\", len(peaks))\n    peak_values = y[peaks]\n    mean_value = np.mean(peak_values)\n    std_value = np.std(peak_values)\n    print(\"Mean value of peak heights:\", mean_value)\n    print(\"Standard deviation of peak heights:\", std_value)\nelse:\n    print(\"No peaks detected in the data.\")\n\n\n\n\n\n\n\n\nNumber of detected peaks: 2\nMean value of peak heights: 1.0729071666806802\nStandard deviation of peak heights: 0.02684451258005749\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport requests\nfrom datetime import datetime\n\n# Specify the data source and format\ndata_url = 'https://url_to_data_file'  # Replace with the actual data URL\n\n# Retrieve data from the NASA repository\nresponse = requests.get(data_url)\ndata = response.text.splitlines()\n\n# Parse the data and extract the relevant columns\ntimestamps = []\nmagnetic_fields = []\n\nfor line in data:\n    if line.startswith('#'):\n        continue  # Skip comment lines or headers\n    fields = line.split()\n    timestamp_str = fields[0]  # Assuming timestamp is in the first column\n    magnetic_field = float(fields[1])  # Assuming magnetic field magnitude is in the second column\n\n    # Convert the timestamp to datetime object (if necessary)\n    timestamp = datetime.strptime(timestamp_str, '%Y-%m-%dT%H:%M:%S')\n\n    timestamps.append(timestamp)\n    magnetic_fields.append(magnetic_field)\n\n# Convert the lists to numpy arrays\ntimestamps = np.array(timestamps)\nmagnetic_fields = np.array(magnetic_fields)\n\n# Perform analysis and spot potential magnetic monopole characteristics\n# (You may need to customize the analysis based on your specific requirements)\n\n# Example: Plot the magnetic field magnitude over time\nplt.figure(figsize=(10, 6))\nplt.plot(timestamps, magnetic_fields)\nplt.xlabel('Timestamp')\nplt.ylabel('Magnetic Field Magnitude')\nplt.title('Magnetic Field Magnitude over Time')\nplt.grid(True)\nplt.show()\n\n# Example: Calculate statistical characteristics\nmean_value = np.mean(magnetic_fields)\nstd_value = np.std(magnetic_fields)\n\nprint(\"Mean value of magnetic field magnitude:\", mean_value)\nprint(\"Standard deviation of magnetic field magnitude:\", std_value)\n\n# Example: Spot potential magnetic monopole characteristics\n# (You may need to implement specific algorithms or methods for this)"
+  },
+  {
+    "objectID": "posts/Magnetometry/Magnetometry_work_web.html",
+    "href": "posts/Magnetometry/Magnetometry_work_web.html",
+    "title": "Looking for the monopole",
+    "section": "",
+    "text": "import numpy as np\nimport matplotlib.pyplot as plt\nfrom scipy.signal import find_peaks\n\n# Generate example magnetometry data (replace with your own data)\nx = np.linspace(0, 10, 1000)\ny = np.sin(x) + np.random.normal(0, 0.1, size=len(x))\n\n# Smooth the data to reduce noise (optional)\nsmoothed_y = np.convolve(y, np.ones(10)/10, mode='same')\n\n# Find peaks in the data\npeaks, _ = find_peaks(smoothed_y, prominence=0.1, distance=50)\n\n# Plot the magnetometry data with detected peaks\nplt.figure(figsize=(8, 6))\nplt.plot(x, y, label='Raw Data')\nplt.plot(x, smoothed_y, label='Smoothed Data')\nplt.plot(x[peaks], y[peaks], 'ro', markersize=8, label='Detected Peaks')\nplt.xlabel('X')\nplt.ylabel('Y')\nplt.legend()\nplt.title('Magnetometry Data with Detected Peaks')\nplt.grid(True)\nplt.show()\n\n# Analyze spot characteristics from the detected peaks\nif len(peaks) &gt; 0:\n    print(\"Number of detected peaks:\", len(peaks))\n    peak_values = y[peaks]\n    mean_value = np.mean(peak_values)\n    std_value = np.std(peak_values)\n    print(\"Mean value of peak heights:\", mean_value)\n    print(\"Standard deviation of peak heights:\", std_value)\nelse:\n    print(\"No peaks detected in the data.\")\n\n\n\n\n\n\n\n\nNumber of detected peaks: 2\nMean value of peak heights: 1.0729071666806802\nStandard deviation of peak heights: 0.02684451258005749\n\n\n\nimport numpy as np\nimport matplotlib.pyplot as plt\nimport requests\nfrom datetime import datetime\n\n# Specify the data source and format\ndata_url = 'https://url_to_data_file'  # Replace with the actual data URL\n\n# Retrieve data from the NASA repository\nresponse = requests.get(data_url)\ndata = response.text.splitlines()\n\n# Parse the data and extract the relevant columns\ntimestamps = []\nmagnetic_fields = []\n\nfor line in data:\n    if line.startswith('#'):\n        continue  # Skip comment lines or headers\n    fields = line.split()\n    timestamp_str = fields[0]  # Assuming timestamp is in the first column\n    magnetic_field = float(fields[1])  # Assuming magnetic field magnitude is in the second column\n\n    # Convert the timestamp to datetime object (if necessary)\n    timestamp = datetime.strptime(timestamp_str, '%Y-%m-%dT%H:%M:%S')\n\n    timestamps.append(timestamp)\n    magnetic_fields.append(magnetic_field)\n\n# Convert the lists to numpy arrays\ntimestamps = np.array(timestamps)\nmagnetic_fields = np.array(magnetic_fields)\n\n# Perform analysis and spot potential magnetic monopole characteristics\n# (You may need to customize the analysis based on your specific requirements)\n\n# Example: Plot the magnetic field magnitude over time\nplt.figure(figsize=(10, 6))\nplt.plot(timestamps, magnetic_fields)\nplt.xlabel('Timestamp')\nplt.ylabel('Magnetic Field Magnitude')\nplt.title('Magnetic Field Magnitude over Time')\nplt.grid(True)\nplt.show()\n\n# Example: Calculate statistical characteristics\nmean_value = np.mean(magnetic_fields)\nstd_value = np.std(magnetic_fields)\n\nprint(\"Mean value of magnetic field magnitude:\", mean_value)\nprint(\"Standard deviation of magnetic field magnitude:\", std_value)\n\n# Example: Spot potential magnetic monopole characteristics\n# (You may need to implement specific algorithms or methods for this)"
   }
 ]

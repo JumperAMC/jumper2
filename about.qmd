@@ -4,7 +4,7 @@ image: profile.jpg
 about:
   template: jolla
   links:
-  
+
     - icon: linkedin
       text: LinkedIn
       href: https://linkedin.com
@@ -14,4 +14,4 @@ about:
 
 ---
 
-About this blog
+About this blog - Andy adds some text to see if the update goes live.

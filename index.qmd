@@ -1,5 +1,5 @@
 ---
-title: "jumper2"
+title: "jumper does code blog"
 listing:
   contents: posts
   sort: "date desc"

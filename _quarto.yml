@@ -2,7 +2,7 @@ project:
   type: website
 
 website:
-  title: "jumper2"
+  title: "jumper"
   navbar:
     right:
       - about.qmd

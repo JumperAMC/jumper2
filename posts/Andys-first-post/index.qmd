@@ -1,0 +1,10 @@
+---
+title: "Andy writes some markup for a post"
+author: "JumperAMC"
+date: "2025-03-29"
+categories: [news, code, analysis]
+image: "JumperImage.png"
+---
+
+Does my image show up? Oddly not yet
+
