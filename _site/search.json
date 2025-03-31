@@ -16,9 +16,9 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Dr Andrew M Collins PhD",
     "section": "",
-    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism around commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
+    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
   },
   {
     "objectID": "posts/welcome/index.html",
@@ -54,5 +54,12 @@
     "title": "About",
     "section": "",
     "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism around commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
+  },
+  {
+    "objectID": "about.html#andy-collins",
+    "href": "about.html#andy-collins",
+    "title": "About",
+    "section": "",
+    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
   }
 ]
