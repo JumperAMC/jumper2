@@ -1,8 +1,9 @@
 ---
 title: "About"
-image: profile.jpg
+image: JumperImage.jpg
 about:
-  template: jolla
+  id: hero-heading
+  template: solana
   links:
 
     - icon: linkedin
@@ -14,4 +15,9 @@ about:
 
 ---
 
-About this blog - Andy adds some text to see if the update goes live.
+:::{#hero-heading}
+Hi, I'm Andy Collins and I'm a multidisciplinary scientist with a specialism around commercialisation of emerging and cutting edge science. 
+
+I'm a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol.
+
+:::
