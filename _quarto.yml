@@ -5,11 +5,11 @@ website:
   title: "jumper"
   navbar:
     right:
-      - about.qmd
+      - blog.qmd
       - icon: github
-        href: https://github.com/
-      - icon: twitter
-        href: https://twitter.com
+        href: https://github.com/JumperAMC
+      - icon: linkedin
+        href: https://www.linkedin.com/in/andy-collins-27946734/
 format:
   html:
     theme:

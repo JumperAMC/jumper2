@@ -1,14 +1,21 @@
 ---
-title: "jumper does code blog"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  categories: true
-  sort-ui: false
-  filter-ui: false
-page-layout: full
-title-block-banner: true
+title: "Dr Andrew M Collins PhD"
+image: JumperImage.jpg
+image-width: 100%
+about:
+  id: hero-heading
+  template: trestles
+  links:
+
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/andy-collins-27946734/
+    - icon: github
+      text: Github
+      href: https://github.com/JumperAMC
+
 ---
 
+Hi, I'm Andy Collins and I'm a multidisciplinary scientist with a specialism in commercialisation of emerging and cutting edge science. 
 
+I'm a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol.

@@ -7,5 +7,14 @@
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/Magnetometry/Magnetometry_work_web.html",
+      "/posts/Andys-first-post/index.html",
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html"
+    ]
   }
 ]

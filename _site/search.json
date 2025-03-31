@@ -2,9 +2,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "jumper does code blog",
+    "title": "Dr Andrew M Collins PhD",
     "section": "",
-    "text": "Looking for the monopole\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nAndy writes some markup for a post\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 29, 2025\n\n\nJumperAMC\n\n\n\n\n\n\n\n\n\n\n\n\nPost With Code\n\n\n\n\n\n\nnews\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nMar 28, 2025\n\n\nHarlow Malloc\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nMar 25, 2025\n\n\nTristan O’Malley\n\n\n\n\n\n\nNo matching items"
+    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -61,5 +61,19 @@
     "title": "About",
     "section": "",
     "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by trianing and have worked extensively in the nanoscience and quantum engineering fields. I am a consultant and sometimes senior lecturer at the University of Bristol."
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "I run a few different projects and I am finding a blog is a useful place to put useful things for me, and sometimes others, to take a look at."
+  },
+  {
+    "objectID": "blog.html#jumper-blogs-here",
+    "href": "blog.html#jumper-blogs-here",
+    "title": "Blog",
+    "section": "",
+    "text": "I run a few different projects and I am finding a blog is a useful place to put useful things for me, and sometimes others, to take a look at."
   }
 ]

@@ -1,0 +1,18 @@
+---
+title: "Blog"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: default
+  categories: true
+  sort-ui: false
+  filter-ui: false
+page-layout: full
+title-block-banner: true
+---
+
+## Jumper blogs here
+
+I run a few different projects and I am finding a blog is a useful place to put useful things for me, and sometimes others, to take a look at. 
+
+---
