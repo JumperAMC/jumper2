@@ -5,7 +5,13 @@ website:
   title: "jumper"
   navbar:
     right:
-      - blog.qmd
+      - text: "projects"
+        href: projects.qmd
+      - text: "publications"
+        href: publications.qmd
+      - text: "blog"
+        href: blog.qmd
+    left:
       - icon: github
         href: https://github.com/JumperAMC
       - icon: linkedin

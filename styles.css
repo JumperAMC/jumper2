@@ -1,1 +1,13 @@
-/* css styles */
+/* styles.css */
+.rounded-image {
+  border-radius: 20px; /* Adjust the radius as needed */
+}
+/*```markdown below to call the function to round corners - use the line below
+![My Image](my-image.jpg){.rounded-image}
+```*/
+
+
+/*below alters the heading image*/
+#hero-heading img {
+  border-radius: 40px;
+}
