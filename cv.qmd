@@ -29,9 +29,11 @@ h3 + p strong { font-size: 1.1em; } /* Make employer name slightly larger */
 ## Contact Information
 
 **Dr. Andrew Michael Collins**
-:e-mail: [drandycollins@googlemail.com](mailto:drandycollins@googlemail.com)
+Contact me on [LinedIn](https://www.linkedin.com/in/andy-collins-27946734/)
 
-:orcid publishing ID: [orcid.org/0000-0003-3088-1710](https://orcid.org/0000-0003-3088-1710)
+Orcid publishing ID: [orcid.org/0000-0003-3088-1710](https://orcid.org/0000-0003-3088-1710)
+
+Buy my book! [Nanotechnology Cookbook](https://www.amazon.co.uk/Nanotechnology-Cookbook-Jargon-free-Experimental-Procedures/dp/0080971725)
 
 ## Skills ##
 

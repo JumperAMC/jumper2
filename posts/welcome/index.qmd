@@ -1,11 +1,11 @@
 ---
 title: "Welcome To My Blog"
-author: "Tristan O'Malley"
+author: "Jumper AMC"
 date: "2025-03-25"
 categories: [news]
 ---
 
-This is the first post in a Quarto blog. Welcome!
+Jumper is starting a Quarto blog! 
 
 ![](thumbnail.jpg)
 
