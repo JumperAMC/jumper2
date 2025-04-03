@@ -29,7 +29,8 @@ h3 + p strong { font-size: 1.1em; } /* Make employer name slightly larger */
 ## Contact Information
 
 **Dr. Andrew Michael Collins**
-Contact me on [LinedIn](https://www.linkedin.com/in/andy-collins-27946734/)
+
+Contact me on [LinkedIn](https://www.linkedin.com/in/andy-collins-27946734/)
 
 Orcid publishing ID: [orcid.org/0000-0003-3088-1710](https://orcid.org/0000-0003-3088-1710)
 
