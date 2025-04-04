@@ -1,0 +1,17 @@
+[
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/Magnetometry/Magnetometry_work_web.html",
+      "/posts/Andys-first-post/index.html",
+      "/posts/post-with-code/index.html",
+      "/posts/welcome/index.html"
+    ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/Keras_train_and_test_of_radar_signals.html"
+    ]
+  }
+]
