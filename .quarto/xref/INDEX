@@ -1,0 +1,44 @@
+{
+  "index.qmd": {
+    "index.html": "f90f35e7"
+  },
+  "about.qmd": {
+    "about.html": "d09579c6"
+  },
+  "posts/post-with-code/index.qmd": {
+    "index.html": "32096792"
+  },
+  "posts/welcome/index.qmd": {
+    "index.html": "dff20d8a"
+  },
+  "posts/Andys-first-post/index.qmd": {
+    "index.html": "0d371110"
+  },
+  "posts/Andys-first-post/Magnetometry_work_web.ipynb": {
+    "Magnetometry_work_web.html": "5688627f"
+  },
+  "posts/Magnetometry/Magnetometry_work_web.ipynb": {
+    "Magnetometry_work_web.html": "79c6cd68"
+  },
+  "blog.qmd": {
+    "blog.html": "e81a469e"
+  },
+  "projects.qmd": {
+    "projects.html": "af47ea40"
+  },
+  "publications.qmd": {
+    "publications.html": "66de7419"
+  },
+  "cv.qmd": {
+    "cv.html": "d3576974"
+  },
+  "projects/2023jansrftrainingmodelWORKING.ipynb": {
+    "2023jansrftrainingmodelWORKING.html": "93b86f5c"
+  },
+  "projects/Copy of SRFKeras.ipynb": {
+    "Copy of SRFKeras.html": "cecad788"
+  },
+  "projects/Keras_train_and_test_of_radar_signals.ipynb": {
+    "Keras_train_and_test_of_radar_signals.html": "e37305dc"
+  }
+}
