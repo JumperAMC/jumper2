@@ -2,7 +2,13 @@
 title: "Publications"
 bibliography: references.bib  # Tells Quarto where your .bib file is
 csl: nature.csl             # Tells Quarto which style file to use
-# Add any other page options you might have here
+nocite: |
+  @*
 ---
 
-# Rest of your page content goes below
+## My Publications
+
+Here is a list of my publications. I am especially happy with the books as they took a huge level of effort, but it's very rewarding to have a copy in your hand:
+
+::: {#refs}
+:::
