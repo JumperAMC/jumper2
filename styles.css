@@ -11,3 +11,8 @@
 #hero-heading img {
   border-radius: 40px;
 }
+
+body.projects-page .intro-text {
+  display: none;
+}
+
