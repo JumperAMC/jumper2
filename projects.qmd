@@ -1,0 +1,37 @@
+---
+title: "Projects"
+sidebar: projects
+#listing:
+  #contents: projects  # Look for content in the 'projects' folder
+  #type: default       # Use the default listing style
+  #sort: "date desc"   # Sort by date, newest first
+  #categories: true    # Enable filtering by categories if you use them
+  #sort-ui: true       # Show UI for sorting
+  #filter-ui: true     # Show UI for filtering
+  #feed: true          # Optional: Generate an RSS feed
+  #fields: [title, date, categories, description, author, image] # Fields to display
+  #field-display-names:
+    #image: "Preview"
+#new test code below
+listing:
+  contents: projects  # Look for content in the 'projects' folder
+  type: default       # Use the default listing style
+  sort: "date desc"   # Sort by date, newest first
+  categories: true    # Enable filtering by categories if you use them
+  sort-ui: true       # Show UI for sorting
+  filter-ui: true     # Show UI for filtering
+  feed: true          # Optional: Generate an RSS feed
+  fields: [title, date, categories, description, author, image] # Fields to display
+  field-display-names:
+    image: "Preview"
+toc: true             # Enable the table of contents
+toc-location: left    # Place the TOC on the left side
+toc-depth: 3          # Optional: Control the depth of the TOC (e.g., up to h3)
+---
+
+This page lists some of the projects I have been involved in.
+
+The list below is automatically generated from the `.qmd` and `.ipynb` files inside the `projects` folder. You should be able to directly download code and I've set it up so you can run things directly in google colab if you want to have a go. 
+
+:::{#listing-default}
+:::

@@ -16,5 +16,12 @@
       "/posts/post-with-code/index.html",
       "/posts/welcome/index.html"
     ]
+  },
+  {
+    "listing": "/projects.html",
+    "items": [
+      "/projects/2023jansrftrainingmodelWORKING.html",
+      "/projects/Copy of SRFKeras.html"
+    ]
   }
 ]
