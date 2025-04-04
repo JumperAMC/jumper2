@@ -5,7 +5,9 @@ date: "today" # You can replace "today" with a specific date like "April 2025"
 format:
   html:
     theme: journal # Choose a Quarto theme: cosmo, journal, simplex, yeti, etc.
-    toc: false # Set to true if you want a Table of Contents
+    toc: true
+    toc-location: left
+    toc-depth: 3 # Set to true if you want a Table of Contents
 # You can add other formats like PDF if needed:
 # format:
 #   pdf:

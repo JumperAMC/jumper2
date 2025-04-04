@@ -1,0 +1,8 @@
+---
+title: "Publications"
+bibliography: references.bib  # Tells Quarto where your .bib file is
+csl: nature.csl             # Tells Quarto which style file to use
+# Add any other page options you might have here
+---
+
+# Rest of your page content goes below

@@ -1,6 +1,6 @@
 ---
-title: "Projects"
-sidebar: projects
+title: "projects"
+#sidebar: projects
 #listing:
   #contents: projects  # Look for content in the 'projects' folder
   #type: default       # Use the default listing style
@@ -15,7 +15,7 @@ sidebar: projects
 #new test code below
 listing:
   contents: projects  # Look for content in the 'projects' folder
-  type: default       # Use the default listing style
+  type: grid     # Use the default listing style
   sort: "date desc"   # Sort by date, newest first
   categories: true    # Enable filtering by categories if you use them
   sort-ui: true       # Show UI for sorting
@@ -32,6 +32,26 @@ toc-depth: 3          # Optional: Control the depth of the TOC (e.g., up to h3)
 This page lists some of the projects I have been involved in.
 
 The list below is automatically generated from the `.qmd` and `.ipynb` files inside the `projects` folder. You should be able to directly download code and I've set it up so you can run things directly in google colab if you want to have a go. 
+
+## Radar Recognition using Keras
+
+I used Tensorflow and Keras to build a model capable of recognising events in a radar signal.
+
+### Capturing data from my radar array
+
+Under construction!
+
+### Building the model from signals in Keras
+
+[Using Keras to train and build the model](\projects\Keras_train_and_test_of_radar_signals.html)
+
+## Project 2
+
+This is a heading for project 2
+
+### Sub heading for project 2
+
+Some more text
 
 :::{#listing-default}
 :::
