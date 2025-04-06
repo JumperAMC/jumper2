@@ -116,7 +116,7 @@
     "href": "index.html",
     "title": "Dr Andrew M Collins PhD",
     "section": "",
-    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist and lecturer with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by training and have worked extensively in the nanoscience and quantum engineering fields. Mostly at the interface between industry and academia. I was a senior lecturer in entrepreneurship and innovation at the University of Bristol. I am often found at the early stages of a deep-tech start-up and have felt some of those ups and downs myself.\nMy full CV is avalable along with some (non-NDA covered) examples of the interesting stuff I’ve been involved with in the menu. Some of it is code, mostly python, and please feel free to use it if it will help!"
+    "text": "Hi, I’m Andy Collins and I’m a multidisciplinary scientist and lecturer with a specialism in commercialisation of emerging and cutting edge science.\nI’m a nanomaterials scientist by training and have worked extensively in the nanoscience and quantum engineering fields. Mostly at the interface between industry and academia. I was a senior lecturer in entrepreneurship and innovation at the University of Bristol. I am often found at the early stages of a deep-tech start-up and have felt some of those ups and downs myself.\nMy full CV is available along with some (non-NDA covered) examples of the interesting stuff I’ve been involved with in the menu. Some of it is code, mostly python, and please feel free to use it if it will help!"
   },
   {
     "objectID": "posts/Magnetometry/Magnetometry_work_web.html",
@@ -137,20 +137,6 @@
     "href": "projects.html",
     "title": "projects",
     "section": "",
-    "text": "This page lists some of the projects I have been involved in.\nThe list below is automatically generated from the .qmd and .ipynb files inside the projects folder. You should be able to directly download code and I’ve set it up so you can run things directly in google colab if you want to have a go."
-  },
-  {
-    "objectID": "projects.html#radar-recognition-using-keras",
-    "href": "projects.html#radar-recognition-using-keras",
-    "title": "projects",
-    "section": "Radar Recognition using Keras",
-    "text": "Radar Recognition using Keras\nI used Tensorflow and Keras to build a model capable of recognising events in a radar signal.\n\nCapturing data from my radar array\nUnder construction!\n\n\nBuilding the model from signals in Keras\nUsing Keras to train and build the model"
-  },
-  {
-    "objectID": "projects.html#workshops",
-    "href": "projects.html#workshops",
-    "title": "projects",
-    "section": "Workshops",
-    "text": "Workshops\nI’ve been lucky enough to travel all over the world delivering innovation and commercialisation workshops\n\nInnovation in quantum engineering\nUnder construction\n\n\nFrom Benchtop to Business\nUnder construction"
+    "text": "This page lists some of the projects I have been involved in. …\n\n\n\n\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nHow I trained a radar signal recognition model with Keras\n\n\n\n\n\n\nproject\n\n\ncode\n\n\nanalysis\n\n\n\n\n\n\n\n\n\nApr 4, 2025\n\n\nJumperAMC\n\n\n\n\n\n\nNo matching items"
   }
 ]

@@ -1,7 +1,31 @@
 ---
-title: "projects"
-
-#new test code below
+title: "projects" # Your existing page title
+# Add other page-specific options if needed, like author, date, etc.
+# --- Add the sidebar definition below ---
+sidebar:
+  style: "docked" # Or "floating"
+  search: false  # Or true if you want search here too
+  contents:
+    - text: "Radar Recognition"
+      href: projects/Keras_train_and_test_of_radar_signals.html
+      # You could add sub-items here if you break the project down
+      # contents: 
+      #  - href: ...
+      #    text: "Data Capture"
+      #  - href: ...
+      #    text: "Model Training"
+    - text: "Workshops"
+      # If you have a specific page for workshops, link it:
+      # href: workshops.qmd 
+      contents: 
+        - text: "Innovation in Quantum" # Placeholder, link when page exists
+        - text: "Benchtop to Business"  # Placeholder, link when page exists
+    # Add links to other projects or sections within projects here
+    # - section: "Another Project"
+    #   contents:
+    #     - href: ...
+    #       text: ...
+#puts listing of projects into the main area under a short intro
 listing:
   contents: projects  # Look for content in the 'projects' folder
   type: default     # Use the default listing style
@@ -13,44 +37,12 @@ listing:
   fields: [title, date, categories, description, author, image] # Fields to display
   field-display-names:
     image: "Preview"
-toc: true             # Enable the table of contents
-toc-location: left    # Place the TOC on the left side
-toc-depth: 3          # Optional: Control the depth of the TOC (e.g., up to h3)
-format:
-  html:
-    include-in-header:
-      - text: |
-          <link rel="stylesheet" href="styles.css">
 ---
 
 This page lists some of the projects I have been involved in.
-
-The list below is automatically generated from the `.qmd` and `.ipynb` files inside the `projects` folder. You should be able to directly download code and I've set it up so you can run things directly in google colab if you want to have a go. 
-
-
-## Radar Recognition using Keras
-
-I used Tensorflow and Keras to build a model capable of recognising events in a radar signal.
-
-### Capturing data from my radar array
-
-Under construction!
-
-### Building the model from signals in Keras
-
-[Using Keras to train and build the model](\projects\Keras_train_and_test_of_radar_signals.html)
-
-## Workshops
-
-I've been lucky enough to travel all over the world delivering innovation and commercialisation workshops
-
-### Innovation in quantum engineering
-Under construction
-
-### From Benchtop to Business
-
-Under construction
+...
 
 ***
 :::{#listing-default}
 :::
+
