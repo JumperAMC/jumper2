@@ -1,0 +1,17 @@
+---
+title: "My Kinect Robot"
+author: "Jumper AMC"
+date: "2025-04-24"
+categories: [project, code]
+---
+# My Kinect Robot
+
+Back in the winter holiday of 2012 I had a very fun and satisfying time trying to learn LabView and play with the Lego Mindstorms Robotics set. I was lucky enough to have 2 sets after winning one in a prize draw at a conference! 
+
+Here is a video of the motion tracking robot I made using two Lego Mindstorms robotics kits and an X-Box Kinect. I was obsessed for a while on doing something that could track my movement and had big dreams of using a motion tracking robot to dig my garden for me. My friend Ceri told me it would be frustrating and near impossible. He might have been right were it not for a great open source toolkit from the University of Leeds which had just been released.
+
+Much of the code and tools are long since deprecated (RIP my Mindstorms kit!) and you will see a much younger version of me in this video. One fantastic outcome from this is that a guy in Japan got in touch with me and since used the code in a class teaching kids robotics! I am super happy with this!
+
+{{< video https://www.youtube.com/embed/jYihwBDDBUo?si=dcxFf3G5cfv53kY3 >}}
+
+ The robot was programmed using Labview 2012 and the [Kinesthesia toolkit](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqbTJMNUNFOVVMRExTT3lnNWU5dk9Iak1fbU9Jd3xBQ3Jtc0tsZDBoejcycXJRM0hGRmdLUDg3aEtnOXJIZ29ZeXlPamR1UFU5NXpEZkpsZUdFT2xWanZHb3FvN2xKcC05eTI4ZkltMDh4SUI4QjRCRmhoeGNKc2lnWlRUcFlDeTZiaHgzeGJ4cEZxYzctNWxHLWc2VQ&q=https%3A%2F%2Fdecibel.ni.com%2Fcontent%2Fdocs%2FDOC-20973&v=jYihwBDDBUo) and the [NXT Mindstorms toolkit](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqa0U2VnZTSE5za01yMTFGV1ZPYUxEYjdETGpSUXxBQ3Jtc0ttczYtMDRJMUtjVzc0dkVGOEtiQjh4V24yTk5YZFBTVE1MZWFLZ3JVdVZyamJNT0dkYk90ME9hTU5Cdk1hWEdGMTE3eG1NWlg2NmJ1TGJUNjl0UzFweFFleVU2NmJTc0pXb3IxSlNVRXdPb054NWdpOA&q=http%3A%2F%2Fjoule.ni.com%2Fnidu%2Fcds%2Fview%2Fp%2Fid%2F2637%2Flang%2Fen&v=jYihwBDDBUo) (I think it was that one). I had only just started using Labview and this seemed like a great project to get up and running. I used skeleton tracking from the toolkit and wired this into the motor power with a basic feedback system (you will see all the details in the code). A big thank you to the good folks at National Instruments who gave me a Lego Mindstorms kit! [The LabView code can be downloaded from here](https://forums.ni.com/t5/Example-Code/Kinect-and-Lego-Mindstorms-Motion-Tracking-Robot/ta-p/3535328)

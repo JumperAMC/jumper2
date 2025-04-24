@@ -12,6 +12,7 @@
   {
     "listing": "/projects.html",
     "items": [
+      "/projects/kinectrobot.html",
       "/projects/Keras_train_and_test_of_radar_signals.html"
     ]
   }

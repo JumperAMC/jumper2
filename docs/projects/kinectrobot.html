@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Jumper AMC">
+<meta name="dcterms.date" content="2025-04-24">
 
-<title>projects – jumper</title>
+<title>My Kinect Robot – jumper</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +25,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-eeb6d1c97efeeb0cfaf56837413d2c8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-eeb6d1c97efeeb0cfaf56837413d2c8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,77 +68,19 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-date','listing-categories','listing-description','listing-author','listing-image',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">jumper</span>
     </a>
   </div>
@@ -149,15 +91,15 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./projects.html" aria-current="page"> 
+    <a class="nav-link" href="../projects.html"> 
 <span class="menu-text">projects</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="../publications.html"> 
 <span class="menu-text">publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../blog.html"> 
 <span class="menu-text">blog</span></a>
   </li>  
   <li class="nav-item compact">
@@ -181,22 +123,36 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(2)</span></div><div class="category" data-category="YW5hbHlzaXM=">analysis <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y29kZQ==">code <span class="quarto-category-count">(2)</span></div><div class="category" data-category="cHJvamVjdA==">project <span class="quarto-category-count">(2)</span></div></div></div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">projects</h1>
-</div>
+<h1 class="title">My Kinect Robot</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">project</div>
+    <div class="quarto-category">code</div>
+  </div>
+  </div>
 
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Jumper AMC </p>
+          </div>
+  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">April 24, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -206,122 +162,18 @@ window.Quarto = {
 </header>
 
 
-<p>This page lists some of the projects I have been involved in. …</p>
-<hr>
-<div id="listing-default">
+<section id="my-kinect-robot" class="level1">
+<h1>My Kinect Robot</h1>
+<p>Back in the winter holiday of 2012 I had a very fun and satisfying time trying to learn LabView and play with the Lego Mindstorms Robotics set. I was lucky enough to have 2 sets after winning one in a prize draw at a conference!</p>
+<p>Here is a video of the motion tracking robot I made using two Lego Mindstorms robotics kits and an X-Box Kinect. I was obsessed for a while on doing something that could track my movement and had big dreams of using a motion tracking robot to dig my garden for me. My friend Ceri told me it would be frustrating and near impossible. He might have been right were it not for a great open source toolkit from the University of Leeds which had just been released.</p>
+<p>Much of the code and tools are long since deprecated (RIP my Mindstorms kit!) and you will see a much younger version of me in this video. One fantastic outcome from this is that a guy in Japan got in touch with me and since used the code in a class teaching kids robotics! I am super happy with this!</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/jYihwBDDBUo?si=dcxFf3G5cfv53kY3" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>The robot was programmed using Labview 2012 and the <a href="https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUFFLUhqbTJMNUNFOVVMRExTT3lnNWU5dk9Iak1fbU9Jd3xBQ3Jtc0tsZDBoejcycXJRM0hGRmdLUDg3aEtnOXJIZ29ZeXlPamR1UFU5NXpEZkpsZUdFT2xWanZHb3FvN2xKcC05eTI4ZkltMDh4SUI4QjRCRmhoeGNKc2lnWlRUcFlDeTZiaHgzeGJ4cEZxYzctNWxHLWc2VQ&amp;q=https%3A%2F%2Fdecibel.ni.com%2Fcontent%2Fdocs%2FDOC-20973&amp;v=jYihwBDDBUo">Kinesthesia toolkit</a> and the <a href="https://www.youtube.com/redirect?event=video_description&amp;redir_token=QUFFLUhqa0U2VnZTSE5za01yMTFGV1ZPYUxEYjdETGpSUXxBQ3Jtc0ttczYtMDRJMUtjVzc0dkVGOEtiQjh4V24yTk5YZFBTVE1MZWFLZ3JVdVZyamJNT0dkYk90ME9hTU5Cdk1hWEdGMTE3eG1NWlg2NmJ1TGJUNjl0UzFweFFleVU2NmJTc0pXb3IxSlNVRXdPb054NWdpOA&amp;q=http%3A%2F%2Fjoule.ni.com%2Fnidu%2Fcds%2Fview%2Fp%2Fid%2F2637%2Flang%2Fen&amp;v=jYihwBDDBUo">NXT Mindstorms toolkit</a> (I think it was that one). I had only just started using Labview and this seemed like a great project to get up and running. I used skeleton tracking from the toolkit and wired this into the motor power with a basic feedback system (you will see all the details in the code). A big thank you to the good folks at National Instruments who gave me a Lego Mindstorms kit! <a href="https://forums.ni.com/t5/Example-Code/Kinect-and-Lego-Mindstorms-Motion-Tracking-Robot/ta-p/3535328">The LabView code can be downloaded from here</a></p>
 
-</div>
 
+</section>
 
-
-
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-    <div class="input-group input-group-sm quarto-listing-filter">
-      <span class="input-group-text"><i class="bi bi-search"></i></span>
-      <input type="text" class="search form-control" placeholder="Filter">
-    </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="cHJvamVjdCUyQ2NvZGU=" data-listing-date-sort="1745449200000" data-listing-file-modified-sort="1745530657324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="289">
-<div class="thumbnail">
-<p><a href="./projects/kinectrobot.html" class="no-external"></a></p><a href="./projects/kinectrobot.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./projects/kinectrobot.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./projects/kinectrobot.html" class="no-external">My Kinect Robot</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./projects/kinectrobot.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvamVjdA=='); return false;">
-project
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Y29kZQ=='); return false;">
-code
-</div>
-</div>
-<div class="listing-description">
-<a href="./projects/kinectrobot.html" class="no-external">Back in the winter holiday of 2012 I had a very fun and satisfying time trying to learn LabView and play with the Lego Mindstorms Robotics set. I was lucky enough to have 2…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./projects/kinectrobot.html" class="no-external">
-<div class="listing-date">
-Apr 24, 2025
-</div>
-<div class="listing-author">
-Jumper AMC
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="cHJvamVjdCUyQ2NvZGUlMkNhbmFseXNpcw==" data-listing-date-sort="1743721200000" data-listing-file-modified-sort="1743930627023" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="870">
-<div class="thumbnail">
-<p><a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external"></a></p><a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external">
-<p class="card-img-top"><img src="projects\Keras_train_and_test_of_radar_signals_files\figure-html\cell-6-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external">How I trained a radar signal recognition model with Keras</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('cHJvamVjdA=='); return false;">
-project
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Y29kZQ=='); return false;">
-code
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YW5hbHlzaXM='); return false;">
-analysis
-</div>
-</div>
-<div class="listing-description">
-<a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external">###&nbsp;SRF January Phase and Range Model Build for Keras This notebook is an update of all the code I have been compiling in January 2023 for SRF/Roke. The aim is to train an…</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./projects/Keras_train_and_test_of_radar_signals.html" class="no-external">
-<div class="listing-date">
-Apr 4, 2025
-</div>
-<div class="listing-author">
-JumperAMC
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
