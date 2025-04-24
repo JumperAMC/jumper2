@@ -4,9 +4,9 @@ author: "Jumper AMC"
 date: "2025-04-24"
 categories: [news]
 ---
-#Tina - the musical
+# Tina - the musical
 
-![Tine turner the musical poster](Tina-the-musical.jpg)
+![Tina turner the musical poster](Tina-the-musical.jpg)
 
 Gait and I went to see the Tina Turner musical last night at the Bristol Hippodrome. As a man of a certain age, and because I was driving, I thought that having a drink before watching a 3 hour show might be a bad idea. We opted instead for some bottles of water and some pick and mix. Going in hard. 
 
