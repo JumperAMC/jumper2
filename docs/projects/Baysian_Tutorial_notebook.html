@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="JumperAMC">
+<meta name="dcterms.date" content="2025-07-07">
+
+<title>From Belief to Code: A Tutorial on Bayesian Networks with Python – jumper</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-eeb6d1c97efeeb0cfaf56837413d2c8e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+<script src="https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">jumper</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../projects.html"> 
+<span class="menu-text">projects</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../publications.html"> 
+<span class="menu-text">publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../blog.html"> 
+<span class="menu-text">blog</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/JumperAMC"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://www.linkedin.com/in/andy-collins-27946734/"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#from-belief-to-code-a-comprehensive-tutorial-on-bayesian-networks-with-python-and-pgmpy" id="toc-from-belief-to-code-a-comprehensive-tutorial-on-bayesian-networks-with-python-and-pgmpy" class="nav-link active" data-scroll-target="#from-belief-to-code-a-comprehensive-tutorial-on-bayesian-networks-with-python-and-pgmpy">From Belief to Code: A Comprehensive Tutorial on Bayesian Networks with Python and pgmpy</a>
+  <ul class="collapse">
+  <li><a href="#part-1-the-bayesian-paradigm-a-new-way-of-reasoning-about-uncertainty" id="toc-part-1-the-bayesian-paradigm-a-new-way-of-reasoning-about-uncertainty" class="nav-link" data-scroll-target="#part-1-the-bayesian-paradigm-a-new-way-of-reasoning-about-uncertainty">Part 1: The Bayesian Paradigm: A New Way of Reasoning About Uncertainty</a>
+  <ul class="collapse">
+  <li><a href="#two-schools-of-thought-a-tale-of-two-probabilities" id="toc-two-schools-of-thought-a-tale-of-two-probabilities" class="nav-link" data-scroll-target="#two-schools-of-thought-a-tale-of-two-probabilities">1.1 Two Schools of Thought: A Tale of Two Probabilities</a></li>
+  <li><a href="#the-engine-of-belief-updating-bayes-theorem" id="toc-the-engine-of-belief-updating-bayes-theorem" class="nav-link" data-scroll-target="#the-engine-of-belief-updating-bayes-theorem">1.2 The Engine of Belief-Updating: Bayes’ Theorem</a></li>
+  </ul></li>
+  <li><a href="#part-2-structuring-knowledge-an-introduction-to-bayesian-networks" id="toc-part-2-structuring-knowledge-an-introduction-to-bayesian-networks" class="nav-link" data-scroll-target="#part-2-structuring-knowledge-an-introduction-to-bayesian-networks">Part 2: Structuring Knowledge: An Introduction to Bayesian Networks</a>
+  <ul class="collapse">
+  <li><a href="#beyond-single-equations-probabilistic-graphical-models" id="toc-beyond-single-equations-probabilistic-graphical-models" class="nav-link" data-scroll-target="#beyond-single-equations-probabilistic-graphical-models">2.1 Beyond Single Equations: Probabilistic Graphical Models</a></li>
+  <li><a href="#the-anatomy-of-a-bayesian-network" id="toc-the-anatomy-of-a-bayesian-network" class="nav-link" data-scroll-target="#the-anatomy-of-a-bayesian-network">2.2 The Anatomy of a Bayesian Network</a></li>
+  <li><a href="#the-importance-of-being-acyclic-directed-acyclic-graphs-dags" id="toc-the-importance-of-being-acyclic-directed-acyclic-graphs-dags" class="nav-link" data-scroll-target="#the-importance-of-being-acyclic-directed-acyclic-graphs-dags">2.3 The Importance of Being Acyclic: Directed Acyclic Graphs (DAGs)</a></li>
+  </ul></li>
+  <li><a href="#part-3-quantifying-relationships-the-role-of-conditional-probability-tables-cpts" id="toc-part-3-quantifying-relationships-the-role-of-conditional-probability-tables-cpts" class="nav-link" data-scroll-target="#part-3-quantifying-relationships-the-role-of-conditional-probability-tables-cpts">Part 3: Quantifying Relationships: The Role of Conditional Probability Tables (CPTs)</a>
+  <ul class="collapse">
+  <li><a href="#what-is-a-conditional-probability-table" id="toc-what-is-a-conditional-probability-table" class="nav-link" data-scroll-target="#what-is-a-conditional-probability-table">3.1 What is a Conditional Probability Table?</a></li>
+  <li><a href="#constructing-a-cpt-from-data-a-manual-walkthrough" id="toc-constructing-a-cpt-from-data-a-manual-walkthrough" class="nav-link" data-scroll-target="#constructing-a-cpt-from-data-a-manual-walkthrough">3.2 Constructing a CPT from Data: A Manual Walkthrough</a></li>
+  </ul></li>
+  <li><a href="#part-4-building-your-first-bayesian-network-with-pgmpy" id="toc-part-4-building-your-first-bayesian-network-with-pgmpy" class="nav-link" data-scroll-target="#part-4-building-your-first-bayesian-network-with-pgmpy">Part 4: Building Your First Bayesian Network with <code>pgmpy</code></a>
+  <ul class="collapse">
+  <li><a href="#setting-up-your-environment" id="toc-setting-up-your-environment" class="nav-link" data-scroll-target="#setting-up-your-environment">4.1 Setting Up Your Environment</a></li>
+  <li><a href="#defining-the-model-structure-the-dag" id="toc-defining-the-model-structure-the-dag" class="nav-link" data-scroll-target="#defining-the-model-structure-the-dag">4.2 Defining the Model Structure (The DAG)</a></li>
+  <li><a href="#implementing-cpts-in-code-with-tabularcpd" id="toc-implementing-cpts-in-code-with-tabularcpd" class="nav-link" data-scroll-target="#implementing-cpts-in-code-with-tabularcpd">4.3 Implementing CPTs in Code with <code>TabularCPD</code></a></li>
+  <li><a href="#assembling-and-validating-the-model" id="toc-assembling-and-validating-the-model" class="nav-link" data-scroll-target="#assembling-and-validating-the-model">4.4 Assembling and Validating the Model</a></li>
+  </ul></li>
+  <li><a href="#part-5-activating-your-model-probabilistic-inference-with-pgmpy" id="toc-part-5-activating-your-model-probabilistic-inference-with-pgmpy" class="nav-link" data-scroll-target="#part-5-activating-your-model-probabilistic-inference-with-pgmpy">Part 5: Activating Your Model: Probabilistic Inference with <code>pgmpy</code></a>
+  <ul class="collapse">
+  <li><a href="#the-power-of-inference-asking-your-model-questions" id="toc-the-power-of-inference-asking-your-model-questions" class="nav-link" data-scroll-target="#the-power-of-inference-asking-your-model-questions">5.1 The Power of Inference: Asking Your Model Questions</a></li>
+  <li><a href="#exact-inference-with-variable-elimination" id="toc-exact-inference-with-variable-elimination" class="nav-link" data-scroll-target="#exact-inference-with-variable-elimination">5.2 Exact Inference with Variable Elimination</a></li>
+  </ul></li>
+  <li><a href="#part-6-a-glimpse-into-advanced-topics-learning-networks-from-data" id="toc-part-6-a-glimpse-into-advanced-topics-learning-networks-from-data" class="nav-link" data-scroll-target="#part-6-a-glimpse-into-advanced-topics-learning-networks-from-data">Part 6: A Glimpse into Advanced Topics: Learning Networks from Data</a>
+  <ul class="collapse">
+  <li><a href="#learning-parameters-and-structure" id="toc-learning-parameters-and-structure" class="nav-link" data-scroll-target="#learning-parameters-and-structure">6.1 Learning Parameters and Structure</a></li>
+  </ul></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">From Belief to Code: A Tutorial on Bayesian Networks with Python</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">project</div>
+    <div class="quarto-category">code</div>
+    <div class="quarto-category">analysis</div>
+  </div>
+  </div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>JumperAMC </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">July 7, 2025</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><a href="https://colab.research.google.com/github/JumperAMC/jumper2/blob/main/Keras_train_and_test_of_radar_signals.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a></p>
+<section id="from-belief-to-code-a-comprehensive-tutorial-on-bayesian-networks-with-python-and-pgmpy" class="level1">
+<h1>From Belief to Code: A Comprehensive Tutorial on Bayesian Networks with Python and pgmpy</h1>
+<section id="part-1-the-bayesian-paradigm-a-new-way-of-reasoning-about-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-the-bayesian-paradigm-a-new-way-of-reasoning-about-uncertainty">Part 1: The Bayesian Paradigm: A New Way of Reasoning About Uncertainty</h2>
+<p>At the heart of modern data science, machine learning, and artificial intelligence lies the challenge of reasoning under uncertainty. For over a century, the field of statistics has been dominated by a particular school of thought. Yet, a powerful and increasingly influential alternative offers not just a different set of tools, but a fundamentally different philosophy for quantifying what we know and how we learn. This is the Bayesian paradigm, a framework that treats probability as a degree of belief, which can be systematically updated in the light of new evidence. This tutorial provides a comprehensive guide to this paradigm, moving from its foundational principles to its practical implementation in building complex probabilistic models with the <code>pgmpy</code> library in Python.</p>
+<section id="two-schools-of-thought-a-tale-of-two-probabilities" class="level3">
+<h3 class="anchored" data-anchor-id="two-schools-of-thought-a-tale-of-two-probabilities">1.1 Two Schools of Thought: A Tale of Two Probabilities</h3>
+<p>The discipline of statistics is marked by a deep philosophical divide between two primary approaches: the Frequentist and the Bayesian.[1] Understanding this distinction is the first step toward appreciating the unique power of Bayesian methods.</p>
+<p><strong>The Frequentist View</strong></p>
+<p>The Frequentist approach, which forms the basis of most introductory statistics courses, defines probability as the long-term frequency of an event over many hypothetical repetitions of an experiment. Consider the canonical example of flipping a fair coin. A Frequentist would assert that the probability of getting heads is 0.5. This assertion is not a statement about a single coin flip; rather, it’s a claim that if one were to flip the coin an infinite number of times, the proportion of heads would converge to 50%.[1, 2]</p>
+<p>In this framework, the parameters of a population—such as the true mean of a distribution or the true coefficient in a regression model—are considered fixed, unknown constants.[3, 4] The goal of a statistical analysis is to use observed data, which is treated as a random sample, to estimate these fixed constants. The uncertainty captured by concepts like a “95% confidence interval” is not uncertainty about the parameter itself. Instead, it is uncertainty about the estimation procedure; it means that if the experiment were repeated many times, 95% of the calculated intervals would contain the true, fixed parameter. This interpretation is often counterintuitive and frequently misunderstood.[5]</p>
+<p><strong>The Bayesian View</strong></p>
+<p>The Bayesian approach offers a more intuitive definition of probability: it is a measure of subjective belief, confidence, or the state of knowledge about a proposition.[3, 6] This perspective allows one to assign probabilities to events that cannot be repeated, such as the probability that a specific candidate will win an election or that the Chicago Bulls would win the championship in 2001—questions for which the Frequentist must remain silent.[7]</p>
+<p>Crucially, in the Bayesian world, a parameter is not a fixed constant but a random variable about which we can have a distribution of beliefs.[1, 4] Our analysis begins with a <strong>prior probability distribution</strong>, which encodes our initial beliefs about the parameter before observing any data. As we collect data, we use a mathematical engine called Bayes’ Theorem to update our initial beliefs, resulting in a <strong>posterior probability distribution</strong>. This posterior distribution represents our refined state of knowledge, combining our prior beliefs with the information provided by the evidence.[2, 8, 9]</p>
+<p>This philosophical difference leads to profoundly different outputs. A Frequentist analysis might yield a p-value to help decide whether to reject a null hypothesis (e.g., “is there a statistically significant difference between A and B?”).[2, 8] A Bayesian analysis, in contrast, provides a full probability distribution for the parameter of interest, directly answering questions like, “What is the probability that A is better than B, and by how much?”.[8, 10] The Bayesian output, such as a 95% credible interval, carries a more direct interpretation: there is a 95% probability that the true value of the parameter lies within this range, given the data and the model.[5] This directness and interpretability are major reasons for the growing adoption of Bayesian methods in complex fields.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Aspect</th>
+<th style="text-align: left;">Frequentist Approach</th>
+<th style="text-align: left;">Bayesian Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Philosophy of Probability</strong></td>
+<td style="text-align: left;">Objective long-run frequency of events.[2, 11]</td>
+<td style="text-align: left;">Subjective degree of belief or confidence.[3, 6]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Treatment of Parameters</strong></td>
+<td style="text-align: left;">Fixed, unknown constants.[4, 9]</td>
+<td style="text-align: left;">Random variables with probability distributions.[1, 4]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Core Method</strong></td>
+<td style="text-align: left;">Hypothesis testing (p-values), Maximum Likelihood Estimation.[2, 8]</td>
+<td style="text-align: left;">Bayes’ Theorem to update beliefs (Priors -&gt; Posteriors).[8, 9]</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Primary Output</strong></td>
+<td style="text-align: left;">Point estimates, confidence intervals, p-values.[2, 9]</td>
+<td style="text-align: left;">Full posterior probability distributions, credible intervals.[10, 12]</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Role of Prior Knowledge</strong></td>
+<td style="text-align: left;">Not formally incorporated; objectivity is key.[11]</td>
+<td style="text-align: left;">Formally incorporated via a “prior” distribution.[2, 12]</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="the-engine-of-belief-updating-bayes-theorem" class="level3">
+<h3 class="anchored" data-anchor-id="the-engine-of-belief-updating-bayes-theorem">1.2 The Engine of Belief-Updating: Bayes’ Theorem</h3>
+<p>The mathematical cornerstone of Bayesian statistics is Bayes’ Theorem. While its derivation is a straightforward consequence of the definition of conditional probability, its implications are profound.[13, 14] It provides the formal mechanism for learning from experience and updating our beliefs.</p>
+<p>The theorem is stated as:</p>
+<p><span class="math display">\[P(H|E) = \frac{P(E|H) P(H)}{P(E)}\]</span></p>
+<p>Where: * <span class="math inline">\(P(H|E)\)</span> is the <strong>posterior probability</strong>: the probability of our hypothesis <span class="math inline">\(H\)</span> being true, <em>given</em> the evidence <span class="math inline">\(E\)</span>. This is our updated belief.[9, 15] * <span class="math display">\[P(H)\]</span> is the <strong>prior probability</strong>: our initial belief in the hypothesis <span class="math inline">\(H\)</span> <em>before</em> considering the new evidence.[16] * <span class="math inline">\(P(E|H)\)</span> is the <strong>likelihood</strong>: the probability of observing the evidence <span class="math inline">\(E\)</span> <em>if</em> our hypothesis <span class="math inline">\(H\)</span> were true.[16, 17] * <span class="math inline">\(P(E)\)</span> is the <strong>evidence</strong> (or marginal likelihood): the total probability of observing the evidence <span class="math inline">\(E\)</span> under all possible hypotheses. It acts as a normalization constant.[13, 18]</p>
+<p>To make this tangible, consider a classic medical diagnosis problem, which illustrates how human intuition often fails where Bayesian reasoning succeeds.[18, 19]</p>
+<p>Suppose 1% of women in a certain demographic have a particular type of cancer. A mammogram test is developed; it correctly identifies 80% of women who have the cancer (true positive rate) but also reports a positive result for 9.6% of women who do not have cancer (false positive rate). If a woman from this demographic receives a positive mammogram, what is the probability she actually has cancer?</p>
+<p>Many people intuitively jump to a high number, near 80%. However, Bayes’ Theorem reveals a very different and counterintuitive answer.</p>
+<ul>
+<li><strong>Hypothesis (H):</strong> The woman has cancer.</li>
+<li><strong>Evidence (E):</strong> The woman has a positive mammogram.</li>
+</ul>
+<p>Let’s break down the components: * <strong>Prior <span class="math inline">\(P(H)\)</span>:</strong> The prevalence of cancer is 1%, so <span class="math inline">\(P(H) = 0.01\)</span>. This is our starting belief. * <strong>Likelihood <span class="math inline">\(P(E|H)\)</span>:</strong> The probability of a positive test given cancer (the true positive rate) is 80%, so <span class="math inline">\(P(E|H) = 0.80\)</span>. * <strong>Evidence <span class="math inline">\(P(E)\)</span>:</strong> This is the total probability of getting a positive test. It’s the sum of true positives and false positives. * Chance of a true positive = <span class="math inline">\(P(E|H) \times P(H) = 0.80 \times 0.01 = 0.008\)</span>. * Chance of a false positive = <span class="math inline">\(P(E|\neg H) \times P(\neg H) = 0.096 \times (1 - 0.01) = 0.096 \times 0.99 \approx 0.095\)</span>. * Therefore, <span class="math inline">\(P(E) = 0.008 + 0.095 = 0.103\)</span>. About 10.3% of all women will test positive. * <strong>Posterior <span class="math inline">\(P(H|E)\)</span>:</strong> Now we can calculate our final answer. <span class="math inline">\(P(H|E) = (0.80 \times 0.01) / 0.103 = 0.008 / 0.103 \approx 0.078\)</span>.</p>
+<p>The updated probability is only 7.8%. A positive test result doesn’t make cancer an 80% certainty; it just “slides” the initial 1% probability up to 7.8%.[19] The reason is that false positives from the large population of healthy women (99%) are far more numerous than true positives from the small population of sick women (1%).</p>
+<p>A more intuitive way to think about the theorem is to see it as adjusting a prior belief by an “update factor” [13]:</p>
+<p><span class="math inline">\(P(H|E) = P(H) \times \frac{P(E|H)}{P(E)}\)</span></p>
+<p>The term <span class="math inline">\(P(E|H) / P(E)\)</span> captures the strength of the evidence. It measures how much more likely the evidence is if our hypothesis is true, compared to its general likelihood. If this ratio is large, it means the evidence is a strong indicator, and our belief will be updated significantly.[13, 14]</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Component</th>
+<th style="text-align: left;">Formula Term</th>
+<th style="text-align: left;">Intuitive Question</th>
+<th style="text-align: left;">Example (from [18, 19])</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Prior</strong></td>
+<td style="text-align: left;"><code>$P(H)$</code></td>
+<td style="text-align: left;">How common is the condition?</td>
+<td style="text-align: left;">“What is the probability a woman has cancer?” (1%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Likelihood</strong></td>
+<td style="text-align: left;"><code>$P(E|H)$</code></td>
+<td style="text-align: left;">How good is the test at finding the condition?</td>
+<td style="text-align: left;">“If she has cancer, what’s the chance of a positive test?” (80%)</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Evidence</strong></td>
+<td style="text-align: left;"><code>$P(E)$</code></td>
+<td style="text-align: left;">How common is a positive test overall?</td>
+<td style="text-align: left;">“What’s the total chance of a positive test (true or false)?” (10.3%)</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Posterior</strong></td>
+<td style="text-align: left;"><code>$P(H|E)$</code></td>
+<td style="text-align: left;">Given the test result, how likely is the condition?</td>
+<td style="text-align: left;">“If her test is positive, what’s the chance she has cancer?” (7.8%)</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="part-2-structuring-knowledge-an-introduction-to-bayesian-networks" class="level2">
+<h2 class="anchored" data-anchor-id="part-2-structuring-knowledge-an-introduction-to-bayesian-networks">Part 2: Structuring Knowledge: An Introduction to Bayesian Networks</h2>
+<p>Bayes’ Theorem provides a powerful rule for updating our belief about a single hypothesis based on a single piece of evidence. However, real-world problems involve dozens or even hundreds of interconnected variables. Modeling such systems requires a more scalable framework. This is the role of Bayesian Networks.</p>
+<section id="beyond-single-equations-probabilistic-graphical-models" class="level3">
+<h3 class="anchored" data-anchor-id="beyond-single-equations-probabilistic-graphical-models">2.1 Beyond Single Equations: Probabilistic Graphical Models</h3>
+<p>Imagine trying to model the factors affecting a student’s grade. These might include the difficulty of the course, the student’s intelligence, their study habits, their SAT score, and whether they get a good recommendation letter. To model this system comprehensively, one might try to construct a full joint probability distribution, <span class="math inline">\(P(\text{Difficulty, Intelligence, Grade, SAT, Letter})\)</span>. However, even with just five binary variables, this would require specifying <span class="math inline">\(2^5 - 1 = 31\)</span> probabilities. For a system with 30 such variables, the number of probabilities required would exceed one billion. This “curse of dimensionality” makes building and reasoning with full joint distributions computationally intractable for all but the simplest problems.[20]</p>
+<p>Probabilistic Graphical Models (PGMs) are a class of data structures designed to solve this problem. They use a graph to represent a complex probability distribution in a compact way by exploiting the conditional independence relationships between variables.[7, 20, 21] A Bayesian Network (BN) is the most common type of PGM, providing a “skeleton” that allows us to factorize the large, unwieldy joint distribution into a product of smaller, manageable local distributions.[22]</p>
+</section>
+<section id="the-anatomy-of-a-bayesian-network" class="level3">
+<h3 class="anchored" data-anchor-id="the-anatomy-of-a-bayesian-network">2.2 The Anatomy of a Bayesian Network</h3>
+<p>A Bayesian Network consists of two fundamental components that define the model’s qualitative structure and its quantitative parameters.[15, 23, 24]</p>
+<ul>
+<li><strong>Nodes (Vertices):</strong> Each node in the graph represents a random variable of interest in the system. These variables can be discrete, taking on a finite set of values (e.g., <code>Smoker</code> = {Yes, No}), or continuous (e.g., <code>Temperature</code>). In a BN, nodes are the fundamental building blocks representing the concepts we want to model.[15, 23]</li>
+<li><strong>Edges (Arcs):</strong> The nodes are connected by directed arrows, or edges. An edge from a node <code>A</code> to a node <code>B</code> (<span class="math inline">\(A \rightarrow B\)</span>) signifies that <code>A</code> has a direct probabilistic influence on <code>B</code>. In this relationship, <code>A</code> is called the <strong>parent</strong> of <code>B</code>, and <code>B</code> is the <strong>child</strong> of <code>A</code>.[24, 25] These edges encode the conditional dependencies within the model; the state of a child node is probabilistically dependent on the state of its parent nodes.</li>
+</ul>
+</section>
+<section id="the-importance-of-being-acyclic-directed-acyclic-graphs-dags" class="level3">
+<h3 class="anchored" data-anchor-id="the-importance-of-being-acyclic-directed-acyclic-graphs-dags">2.3 The Importance of Being Acyclic: Directed Acyclic Graphs (DAGs)</h3>
+<p>The graphical structure of a Bayesian Network is not just any directed graph; it must be a <strong>Directed Acyclic Graph (DAG)</strong>.[15, 17] This constraint is critical to the logical consistency and computational function of the network.</p>
+<ul>
+<li><strong>Directed:</strong> As described, the edges have a specific direction, indicating the flow of influence or causality from parent to child.[15]</li>
+<li><strong>Acyclic:</strong> The graph must not contain any directed cycles. This means it is impossible to start at a node, follow a sequence of directed edges, and arrive back at the starting node.[25, 26] A path like <span class="math inline">\(A \rightarrow B \rightarrow C \rightarrow A\)</span> is forbidden.</li>
+</ul>
+<p>The acyclic constraint is essential because a cycle would imply a logical paradox. If <span class="math inline">\(A\)</span> influences <span class="math inline">\(B\)</span>, and <span class="math inline">\(B\)</span> influences <span class="math inline">\(A\)</span>, then <span class="math inline">\(A\)</span> is effectively its own ancestor. This creates an infinitely recursive definition that is mathematically and conceptually nonsensical.[25, 26] The DAG structure ensures that a clear “topological ordering” of the variables is always possible, which is fundamental to how the network defines the joint probability distribution and how inference algorithms operate.[26]</p>
+<p>The true power of a BN lies in how this DAG structure allows for a massive simplification of the joint probability distribution. The chain rule of probability allows any joint distribution to be expressed as: <span class="math inline">\(P(X_1, X_2, \dots, X_n) = P(X_1) \times P(X_2|X_1) \times \dots \times P(X_n|X_1, \dots, X_{n-1})\)</span></p>
+<p>This decomposition corresponds to a fully connected graph and offers no computational savings. However, the structure of a BN makes a powerful assertion: <strong>a node is conditionally independent of all its non-descendants, given its parents</strong>.[27] This assumption allows us to simplify the chain rule dramatically. The joint probability distribution “factorizes” according to the graph structure into a product of local conditional probabilities for each node given its parents [17, 22, 27]:</p>
+<p><span class="math display">\[P(X_1, \dots, X_n) = \prod_{i=1}^{n} P(X_i | \text{Parents}(X_i))\]</span></p>
+<p>For example, in a simple chain structure <span class="math inline">\(A \rightarrow B \rightarrow C\)</span>, the joint probability is not <span class="math inline">\(P(A)P(B|A)P(C|A,B)\)</span>. Instead, because the graph asserts that <span class="math inline">\(C\)</span> is independent of <span class="math inline">\(A\)</span> <em>given</em> <span class="math inline">\(B\)</span>, the joint probability simplifies to <span class="math inline">\(P(A)P(B|A)P(C|B)\)</span>.[28] This factorization is the key to a BN’s efficiency. It replaces the need for one enormous table representing the full joint distribution with a collection of much smaller, local tables—one for each node.</p>
+</section>
+</section>
+<section id="part-3-quantifying-relationships-the-role-of-conditional-probability-tables-cpts" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-quantifying-relationships-the-role-of-conditional-probability-tables-cpts">Part 3: Quantifying Relationships: The Role of Conditional Probability Tables (CPTs)</h2>
+<p>Once the qualitative structure of the domain is defined by the DAG, the next step is to specify the quantitative relationships between the variables. For Bayesian Networks with discrete variables, this is accomplished using Conditional Probability Tables (CPTs).[29, 30]</p>
+<section id="what-is-a-conditional-probability-table" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-a-conditional-probability-table">3.1 What is a Conditional Probability Table?</h3>
+<p>A CPT is the numerical engine of a discrete Bayesian Network.[24] Every node in the network has a CPT associated with it that quantifies the probability distribution of that node’s states, conditional on the states of its parents.[27, 31, 32]</p>
+<ul>
+<li>For a <strong>root node</strong> (a node with no parents), the CPT is not conditional. It is simply a table defining the node’s <strong>marginal probability distribution</strong>, often referred to as its prior probability.[23, 24] For a variable <code>Difficulty</code> with states {Easy, Hard}, its CPT would specify <span class="math inline">\(P(\text{Difficulty=Easy})\)</span> and <span class="math inline">\(P(\text{Difficulty=Hard})\)</span>.</li>
+<li>For a <strong>child node</strong> (a node with one or more parents), the CPT specifies the probability distribution of the child for <em>every possible combination</em> of its parents’ states. For a node <code>Grade</code> with parent <code>Difficulty</code>, the CPT would specify <span class="math inline">\(P(\text{Grade} | \text{Difficulty=Easy})\)</span> and <span class="math inline">\(P(\text{Grade} | \text{Difficulty=Hard})\)</span>. Each column in a CPT corresponds to a specific configuration of the parent states, and the probabilities within that column must sum to 1.[24, 33]</li>
+</ul>
+<p>These tables can be populated from expert knowledge, which is common when empirical data is scarce, or they can be learned directly from data.[7, 31]</p>
+</section>
+<section id="constructing-a-cpt-from-data-a-manual-walkthrough" class="level3">
+<h3 class="anchored" data-anchor-id="constructing-a-cpt-from-data-a-manual-walkthrough">3.2 Constructing a CPT from Data: A Manual Walkthrough</h3>
+<p>Before diving into the automated methods in <code>pgmpy</code>, it is invaluable to understand how a CPT can be constructed manually from raw data. This process demystifies the concept of “parameter learning” and reveals that the Maximum Likelihood Estimation (MLE) approach used by many libraries is, at its core, a straightforward process of calculating conditional frequencies.[34]</p>
+<p>Let’s walk through the construction of the CPT for <span class="math inline">\(P(\text{Grade} | \text{Difficulty})\)</span> from a hypothetical dataset of student outcomes.</p>
+<p><strong>Step 1: Obtain the Raw Data</strong> The process begins with a dataset, typically in a tabular format like a pandas DataFrame, containing observations for the variables of interest.</p>
+<p><strong>Part A: Raw Data Snippet (pandas DataFrame <code>df</code>)</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">StudentID</th>
+<th style="text-align: left;">Difficulty</th>
+<th style="text-align: left;">Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">Easy</td>
+<td style="text-align: left;">B</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">Hard</td>
+<td style="text-align: left;">C</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">Easy</td>
+<td style="text-align: left;">A</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+<td style="text-align: left;">…</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">100</td>
+<td style="text-align: left;">Easy</td>
+<td style="text-align: left;">B</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 2: Create a Frequency Table</strong> The next step is to summarize the data by counting the co-occurrences of each state combination. A two-way table, also known as a contingency table, is perfect for this task.[35, 36] This table shows the raw counts for each joint event (e.g., the number of students who took an ‘Easy’ course and received a ‘B’).</p>
+<p><strong>Part B: Frequency Count Table (e.g., <code>pd.crosstab(df.Grade, df.Difficulty)</code>)</strong></p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Difficulty</th>
+<th style="text-align: left;">Easy</th>
+<th style="text-align: left;">Hard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Grade</strong></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">A</td>
+<td style="text-align: left;">20</td>
+<td style="text-align: left;">5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">B</td>
+<td style="text-align: left;">30</td>
+<td style="text-align: left;">15</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">C</td>
+<td style="text-align: left;">10</td>
+<td style="text-align: left;">20</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Total</strong></td>
+<td style="text-align: left;"><strong>60</strong></td>
+<td style="text-align: left;"><strong>40</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Step 3: Calculate Conditional Probabilities</strong> The final step is to convert these raw counts into conditional probabilities. To find <span class="math inline">\(P(\text{Grade} | \text{Difficulty})\)</span>, we must normalize the counts within each column (i.e., for each condition of the parent variable <code>Difficulty</code>).</p>
+<ul>
+<li>For the condition <code>Difficulty='Easy'</code>, there are 60 total students. The probability of getting an ‘A’ <em>given</em> the course was ‘Easy’ is the count of (Grade=‘A’ AND Difficulty=‘Easy’) divided by the total count of (Difficulty=‘Easy’). <span class="math inline">\(P(\text{Grade='A'} | \text{Difficulty='Easy'}) = 20 / 60 \approx 0.33\)</span></li>
+<li>This process is repeated for every cell, dividing each count by its column total.[37, 38]</li>
+</ul>
+<p>This procedure yields the final Conditional Probability Table. This table is the direct input required by <code>pgmpy</code> to quantify the relationship <span class="math inline">\(Difficulty \rightarrow Grade\)</span>. Understanding this manual derivation makes the automated <code>.fit()</code> method in <code>pgmpy</code> a transparent tool rather than an opaque black box.</p>
+<p><strong>Part C: Final Conditional Probability Table (CPT)</strong></p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">’<span class="math inline">\(P(\text{Grade}|(\text{Difficulty})\)</span>’</th>
+<th style="text-align: left;">‘`Difficulty=’Easy’’</th>
+<th style="text-align: left;">Difficulty=‘Hard’</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>Grade=‘A’</strong></td>
+<td style="text-align: left;">20/60 = 0.333</td>
+<td style="text-align: left;">5/40 = 0.125</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>Grade=‘B’</strong></td>
+<td style="text-align: left;">30/60 = 0.500</td>
+<td style="text-align: left;">15/40 = 0.375</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>Grade=‘C’</strong></td>
+<td style="text-align: left;">10/60 = 0.167</td>
+<td style="text-align: left;">20/40 = 0.500</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="part-4-building-your-first-bayesian-network-with-pgmpy" class="level2">
+<h2 class="anchored" data-anchor-id="part-4-building-your-first-bayesian-network-with-pgmpy">Part 4: Building Your First Bayesian Network with <code>pgmpy</code></h2>
+<p>With a solid theoretical foundation in place, it is time to translate these concepts into working Python code. The <code>pgmpy</code> library is a powerful and flexible tool for creating, parameterizing, and performing inference on probabilistic graphical models.[21] This section provides a step-by-step guide to building a Bayesian Network from scratch, using the well-known “Student” model as a running example.[39, 40]</p>
+<section id="setting-up-your-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-up-your-environment">4.1 Setting Up Your Environment</h3>
+<p>First, the <code>pgmpy</code> library needs to be installed. It can be installed using either <code>pip</code> or <code>conda</code>. You can run the following command in your terminal or in a code cell by prepending it with <code>!</code>.</p>
+<div id="3a637081" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is commented out as this normally runs in an environment where I have pre-installed the python modules needed. </span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Uncomment below if you need to load pandas and pygmpy</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Using pip</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#!pip install pgmpy pandas</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Once installed, the necessary classes can be imported into a Python script. For building a discrete Bayesian Network, the two essential classes are <code>BayesianNetwork</code> and <code>TabularCPD</code>.</p>
+<div id="c843734b" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pgmpy.models <span class="im">import</span> DiscreteBayesianNetwork</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pgmpy.factors.discrete <span class="im">import</span> TabularCPD</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="defining-the-model-structure-the-dag" class="level3">
+<h3 class="anchored" data-anchor-id="defining-the-model-structure-the-dag">4.2 Defining the Model Structure (The DAG)</h3>
+<p>The first step in creating a model is to define its graphical structure—the Directed Acyclic Graph. In <code>pgmpy</code>, this is done by creating an instance of the <code>BayesianNetwork</code> class and passing it a list of tuples. Each tuple <code>(parent, child)</code> represents a directed edge in the graph.[39, 40, 42]</p>
+<p>For the Student model, the relationships are: * Difficulty (<code>D</code>) influences Grade (<code>G</code>) * Intelligence (<code>I</code>) influences Grade (<code>G</code>) * Intelligence (<code>I</code>) influences SAT score (<code>S</code>) * Grade (<code>G</code>) influences the quality of a recommendation Letter (<code>L</code>)</p>
+<p>This structure is defined in <code>pgmpy</code> as follows:</p>
+<div id="fe7da02e" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Defining the network structure</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>student_model <span class="op">=</span> DiscreteBayesianNetwork([</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'D'</span>, <span class="st">'G'</span>),</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'I'</span>, <span class="st">'G'</span>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'I'</span>, <span class="st">'S'</span>),</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'G'</span>, <span class="st">'L'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="implementing-cpts-in-code-with-tabularcpd" class="level3">
+<h3 class="anchored" data-anchor-id="implementing-cpts-in-code-with-tabularcpd">4.3 Implementing CPTs in Code with <code>TabularCPD</code></h3>
+<p>With the skeleton of the model in place, the next step is to quantify the probabilistic relationships using <code>TabularCPD</code>. A <code>TabularCPD</code> object must be created for each node in the graph.</p>
+<p>A frequent point of confusion for new users is the structure of the <code>values</code> parameter, especially for nodes with multiple parents. The key rule is that the columns of the <code>values</code> array correspond to a lexicographical ordering of the parent states, as if generated by nested loops.[33, 39]</p>
+<p>Let’s define the CPTs for the Student model, assuming binary states for <code>D</code>, <code>I</code>, <code>S</code>, <code>L</code> and three states for <code>G</code>.</p>
+<p><strong>1. CPT for Difficulty (<code>D</code>) - A Root Node</strong> <code>Difficulty</code> has no parents, so its CPT is a simple prior probability. States: <code>D</code> = {Easy, Hard}</p>
+<div id="a0d6f516" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CPT for Difficulty</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>cpd_d <span class="op">=</span> TabularCPD(variable<span class="op">=</span><span class="st">'D'</span>, variable_card<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span>[[<span class="fl">0.6</span>], [<span class="fl">0.4</span>]],</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                   state_names<span class="op">=</span>{<span class="st">'D'</span>: [<span class="st">'Easy'</span>, <span class="st">'Hard'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>2. CPT for Intelligence (<code>I</code>) - A Root Node</strong> <code>Intelligence</code> also has no parents. States: <code>I</code> = {Dumb, Intelligent}</p>
+<div id="dd7b2f89" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CPT for Intelligence</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cpd_i <span class="op">=</span> TabularCPD(variable<span class="op">=</span><span class="st">'I'</span>, variable_card<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span>[[<span class="fl">0.7</span>], [<span class="fl">0.3</span>]],</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                   state_names<span class="op">=</span>{<span class="st">'I'</span>: [<span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>3. CPT for SAT Score (<code>S</code>) - A Child Node</strong> <code>SAT</code> has one parent: <code>Intelligence</code>. States: <code>S</code> = {Low, High}</p>
+<div id="86f0780f" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CPT for SAT Score</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cpd_s <span class="op">=</span> TabularCPD(variable<span class="op">=</span><span class="st">'S'</span>, variable_card<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span>[[<span class="fl">0.95</span>, <span class="fl">0.2</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           [<span class="fl">0.05</span>, <span class="fl">0.8</span>]],</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                   evidence<span class="op">=</span>[<span class="st">'I'</span>],</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                   evidence_card<span class="op">=</span>[<span class="dv">2</span>],</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                   state_names<span class="op">=</span>{<span class="st">'S'</span>: [<span class="st">'Low'</span>, <span class="st">'High'</span>],</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">'I'</span>: [<span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>4. CPT for Grade (<code>G</code>) - A Child Node with Multiple Parents</strong> <code>Grade</code> has two parents: <code>Difficulty</code> and <code>Intelligence</code>. This is the most complex CPT. States: <code>G</code> = {A, B, C} The <code>evidence</code> list is <code>['I', 'D']</code>. The column ordering will be (I=Dumb, D=Easy), (I=Dumb, D=Hard), (I=Intelligent, D=Easy), (I=Intelligent, D=Hard).</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;"><span class="math inline">\(P(G | I, D)\)</span></th>
+<th style="text-align: left;">I=Dumb, D=Easy</th>
+<th style="text-align: left;">I=Dumb, D=Hard</th>
+<th style="text-align: left;">I=Intelligent, D=Easy</th>
+<th style="text-align: left;">I=Intelligent, D=Hard</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><strong>G=‘A’</strong></td>
+<td style="text-align: left;">0.30</td>
+<td style="text-align: left;">0.05</td>
+<td style="text-align: left;">0.90</td>
+<td style="text-align: left;">0.50</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><strong>G=‘B’</strong></td>
+<td style="text-align: left;">0.40</td>
+<td style="text-align: left;">0.25</td>
+<td style="text-align: left;">0.08</td>
+<td style="text-align: left;">0.30</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><strong>G=‘C’</strong></td>
+<td style="text-align: left;">0.30</td>
+<td style="text-align: left;">0.70</td>
+<td style="text-align: left;">0.02</td>
+<td style="text-align: left;">0.20</td>
+</tr>
+</tbody>
+</table>
+<div id="f07032f0" class="cell" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CPT for Grade</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>cpd_g <span class="op">=</span> TabularCPD(variable<span class="op">=</span><span class="st">'G'</span>, variable_card<span class="op">=</span><span class="dv">3</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span>[[<span class="fl">0.3</span>, <span class="fl">0.05</span>, <span class="fl">0.9</span>, <span class="fl">0.5</span>],</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                           [<span class="fl">0.4</span>, <span class="fl">0.25</span>, <span class="fl">0.08</span>, <span class="fl">0.3</span>],</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>                           [<span class="fl">0.3</span>, <span class="fl">0.7</span>, <span class="fl">0.02</span>, <span class="fl">0.2</span>]],</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>                   evidence<span class="op">=</span>[<span class="st">'I'</span>, <span class="st">'D'</span>],</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>                   evidence_card<span class="op">=</span>[<span class="dv">2</span>, <span class="dv">2</span>],</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>                   state_names<span class="op">=</span>{<span class="st">'G'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>],</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>                                <span class="st">'I'</span>: [<span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>],</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                                <span class="st">'D'</span>: [<span class="st">'Easy'</span>, <span class="st">'Hard'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>5. CPT for Letter (<code>L</code>) - A Child Node</strong> <code>Letter</code> has one parent: <code>Grade</code>. States: <code>L</code> = {Bad, Good}</p>
+<div id="5eb34d3e" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># CPT for Letter</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cpd_l <span class="op">=</span> TabularCPD(variable<span class="op">=</span><span class="st">'L'</span>, variable_card<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                   values<span class="op">=</span>[[<span class="fl">0.1</span>, <span class="fl">0.4</span>, <span class="fl">0.99</span>],</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                           [<span class="fl">0.9</span>, <span class="fl">0.6</span>, <span class="fl">0.01</span>]],</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                   evidence<span class="op">=</span>[<span class="st">'G'</span>],</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                   evidence_card<span class="op">=</span>[<span class="dv">3</span>],</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                   state_names<span class="op">=</span>{<span class="st">'L'</span>: [<span class="st">'Bad'</span>, <span class="st">'Good'</span>],</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                <span class="st">'G'</span>: [<span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>]})</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="assembling-and-validating-the-model" class="level3">
+<h3 class="anchored" data-anchor-id="assembling-and-validating-the-model">4.4 Assembling and Validating the Model</h3>
+<p>After defining all the individual CPTs, they must be associated with the model structure using the <code>add_cpds</code> method.[39, 43]</p>
+<div id="c426ae2a" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Associating the CPDs with the network</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>student_model.add_cpds(cpd_d, cpd_i, cpd_s, cpd_g, cpd_l)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The final and most crucial step before proceeding is to validate the model. The <code>check_model()</code> method performs several critical checks: it verifies that the graph is a DAG, that every node has an associated CPT, and that the probabilities in each CPT column correctly sum to 1. If the model is consistent, it returns <code>True</code>.[39, 43]</p>
+<div id="b1d4a102" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Checking the model for correctness</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>is_valid <span class="op">=</span> student_model.check_model()</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Is the model valid? </span><span class="sc">{</span>is_valid<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Is the model valid? True</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="part-5-activating-your-model-probabilistic-inference-with-pgmpy" class="level2">
+<h2 class="anchored" data-anchor-id="part-5-activating-your-model-probabilistic-inference-with-pgmpy">Part 5: Activating Your Model: Probabilistic Inference with <code>pgmpy</code></h2>
+<p>Building a Bayesian Network is only the first half of the journey. The real value comes from using the completed model to answer questions and make predictions—a process known as probabilistic inference. Inference allows us to compute the probability distribution of certain variables of interest (the query) after observing the values of other variables (the evidence).[40]</p>
+<section id="the-power-of-inference-asking-your-model-questions" class="level3">
+<h3 class="anchored" data-anchor-id="the-power-of-inference-asking-your-model-questions">5.1 The Power of Inference: Asking Your Model Questions</h3>
+<p><code>pgmpy</code> provides a powerful and unified inference engine that is deliberately separated from the model definition. This modular design allows different algorithms to be used with the same model.[44, 45] The two most fundamental types of queries are:</p>
+<ol type="1">
+<li><strong>Probabilistic Query (<code>query</code>):</strong> This computes the posterior probability distribution of one or more variables, given some evidence. For example, “What is the probability of a student getting a Grade ‘A’ given they are Intelligent?”.[46]</li>
+<li><strong>Most Probable Explanation (MAP Query) (<code>map_query</code>):</strong> This finds the most likely state (or combination of states) for a set of variables, given some evidence. For example, “What is the most likely Grade for an Intelligent student in an Easy course?”.[46]</li>
+</ol>
+</section>
+<section id="exact-inference-with-variable-elimination" class="level3">
+<h3 class="anchored" data-anchor-id="exact-inference-with-variable-elimination">5.2 Exact Inference with Variable Elimination</h3>
+<p>For many networks, exact inference is feasible and provides precise answers. The most common algorithm for this is <strong>Variable Elimination (VE)</strong>, which <code>pgmpy</code> implements in the <code>VariableElimination</code> class.[44, 46] This algorithm works by systematically eliminating (summing out) all variables that are not part of the query, resulting in the desired marginal or conditional distribution.</p>
+<p><strong>Initialization</strong> First, the inference engine is initialized by passing the fully specified model to its constructor.</p>
+<div id="59593cca" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pgmpy.inference <span class="im">import</span> VariableElimination</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize the inference engine</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>infer <span class="op">=</span> VariableElimination(student_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Querying for Marginal Probability</strong> A marginal query calculates the overall probability distribution for a variable before any evidence is observed. This provides a baseline understanding of the model’s predictions.</p>
+<div id="8b08671b" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the overall probability distribution of Grade?</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>grade_dist <span class="op">=</span> infer.query(variables<span class="op">=</span>[<span class="st">'G'</span>])</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grade_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+------+----------+
+| G    |   phi(G) |
++======+==========+
+| G(A) |   0.3620 |
++------+----------+
+| G(B) |   0.2884 |
++------+----------+
+| G(C) |   0.3496 |
++------+----------+</code></pre>
+</div>
+</div>
+<p><strong>Querying for Conditional Probability (Inference with Evidence)</strong> This is the most common use case for inference. Evidence is provided as a dictionary where keys are variable names and values are their observed states.</p>
+<p>Let’s ask: “What is the probability distribution for <code>Grade</code> given that the student is <code>Intelligent</code> and the course is <code>Hard</code>?”</p>
+<div id="3deaf8d6" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is P(Grade | Intelligence='Intelligent', Difficulty='Hard')?</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>grade_conditional_dist <span class="op">=</span> infer.query(</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    variables<span class="op">=</span>[<span class="st">'G'</span>],</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    evidence<span class="op">=</span>{<span class="st">'I'</span>: <span class="st">'Intelligent'</span>, <span class="st">'D'</span>: <span class="st">'Hard'</span>}</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(grade_conditional_dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+------+----------+
+| G    |   phi(G) |
++======+==========+
+| G(A) |   0.5000 |
++------+----------+
+| G(B) |   0.3000 |
++------+----------+
+| G(C) |   0.2000 |
++------+----------+</code></pre>
+</div>
+</div>
+<p><strong>Making MAP Queries</strong> Instead of a full distribution, sometimes the goal is to find the single most likely outcome. The <code>map_query</code> method achieves this.</p>
+<p>Let’s ask: “What is the most likely <code>Grade</code> and <code>Letter</code> combination for a student who is not intelligent (<code>Dumb</code>) but took an <code>Easy</code> course?”</p>
+<div id="969eabb9" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What is the most probable Grade and Letter given I='Dumb', D='Easy'?</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>map_result <span class="op">=</span> infer.map_query(</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    variables<span class="op">=</span>[<span class="st">'G'</span>, <span class="st">'L'</span>],</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    evidence<span class="op">=</span>{<span class="st">'I'</span>: <span class="st">'Dumb'</span>, <span class="st">'D'</span>: <span class="st">'Easy'</span>}</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(map_result)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"599f80351fb24a7faf4c093f85185ad1","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-display">
+<script type="application/vnd.jupyter.widget-view+json">
+{"model_id":"3362c23f3f08465a99126bd74a4e64ff","version_major":2,"version_minor":0,"quarto_mimetype":"application/vnd.jupyter.widget-view+json"}
+</script>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'G': 'C', 'L': 'Bad'}</code></pre>
+</div>
+</div>
+<p>The <code>pgmpy</code> inference framework provides a clean and powerful API to unlock the predictive capabilities of a Bayesian Network. By separating the model from the inference algorithm, it allows for flexibility and scalability, enabling users to choose the right tool for their specific problem, from exact methods like Variable Elimination to approximate methods for larger, more complex networks.</p>
+</section>
+</section>
+<section id="part-6-a-glimpse-into-advanced-topics-learning-networks-from-data" class="level2">
+<h2 class="anchored" data-anchor-id="part-6-a-glimpse-into-advanced-topics-learning-networks-from-data">Part 6: A Glimpse into Advanced Topics: Learning Networks from Data</h2>
+<p>The tutorial so far has focused on building Bayesian Networks when the structure (the DAG) and the parameters (the CPTs) are known beforehand, a common scenario when relying on expert knowledge.[7, 31] However, one of the most powerful features of the Bayesian Network framework—and the <code>pgmpy</code> library—is its ability to learn these components directly from data. This capability places BNs at the intersection of knowledge representation and machine learning.</p>
+<section id="learning-parameters-and-structure" class="level3">
+<h3 class="anchored" data-anchor-id="learning-parameters-and-structure">6.1 Learning Parameters and Structure</h3>
+<p>There is a full spectrum of possibilities when it comes to combining domain knowledge and data, and <code>pgmpy</code> provides tools for each scenario.[45, 47]</p>
+<p><strong>Parameter Learning</strong> In many real-world applications, an expert can confidently define the causal structure of a system (the DAG) but lacks the precise numbers to populate the CPTs. In this case, if a dataset is available, <code>pgmpy</code> can learn the CPTs automatically. This process, known as parameter learning, automates the manual frequency-counting procedure detailed in Part 3.</p>
+<p>The library offers two main estimators: * <strong>Maximum Likelihood Estimation (<code>MaximumLikelihoodEstimator</code>):</strong> This method finds the CPT values that maximize the probability of observing the given data. It is equivalent to using the relative frequencies from the data.[34] * <strong>Bayesian Estimation (<code>BayesianEstimator</code>):</strong> This method starts with a prior belief about the CPTs and updates it using the data. This is useful for avoiding probabilities of zero when certain events don’t appear in a small dataset.[34]</p>
+<p>The most convenient way to perform parameter learning is with the <code>fit()</code> method of a <code>BayesianNetwork</code> object.</p>
+<div id="9a1ece58" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pgmpy.estimators <span class="im">import</span> MaximumLikelihoodEstimator</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a dummy dataset that reflects the CPTs we defined</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># In a real scenario, this would be your observed data</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>raw_data <span class="op">=</span> {</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">'D'</span>: [<span class="st">'Easy'</span>, <span class="st">'Easy'</span>, <span class="st">'Hard'</span>, <span class="st">'Easy'</span>, <span class="st">'Hard'</span>, <span class="st">'Hard'</span>, <span class="st">'Easy'</span>, <span class="st">'Easy'</span>, <span class="st">'Hard'</span>, <span class="st">'Easy'</span>],</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'I'</span>: [<span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>, <span class="st">'Dumb'</span>, <span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>, <span class="st">'Intelligent'</span>, <span class="st">'Dumb'</span>, <span class="st">'Intelligent'</span>, <span class="st">'Intelligent'</span>, <span class="st">'Dumb'</span>],</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'G'</span>: [<span class="st">'B'</span>, <span class="st">'A'</span>, <span class="st">'C'</span>, <span class="st">'C'</span>, <span class="st">'B'</span>, <span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'A'</span>, <span class="st">'B'</span>, <span class="st">'C'</span>],</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'S'</span>: [<span class="st">'Low'</span>, <span class="st">'High'</span>, <span class="st">'Low'</span>, <span class="st">'High'</span>, <span class="st">'High'</span>, <span class="st">'High'</span>, <span class="st">'Low'</span>, <span class="st">'Low'</span>, <span class="st">'High'</span>, <span class="st">'Low'</span>],</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'L'</span>: [<span class="st">'Good'</span>, <span class="st">'Good'</span>, <span class="st">'Bad'</span>, <span class="st">'Bad'</span>, <span class="st">'Good'</span>, <span class="st">'Good'</span>, <span class="st">'Bad'</span>, <span class="st">'Good'</span>, <span class="st">'Good'</span>, <span class="st">'Bad'</span>]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.DataFrame(raw_data)</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co"># We use the same model structure as before</span></span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>model_from_data <span class="op">=</span> DiscreteBayesianNetwork([</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'D'</span>, <span class="st">'G'</span>),</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'I'</span>, <span class="st">'G'</span>),</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'I'</span>, <span class="st">'S'</span>),</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>    (<span class="st">'G'</span>, <span class="st">'L'</span>)</span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a><span class="co"># Learn the CPTs from data using Maximum Likelihood Estimation</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>model_from_data.fit(data, estimator<span class="op">=</span>MaximumLikelihoodEstimator)</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a><span class="co"># The model now has learned CPTs and is ready for inference.</span></span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Let's inspect one of the learned CPTs</span></span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(model_from_data.get_cpds(<span class="st">'G'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>INFO:pgmpy: Datatype (N=numerical, C=Categorical Unordered, O=Categorical Ordered) inferred from data: 
+ {'D': 'C', 'I': 'C', 'G': 'C', 'S': 'C', 'L': 'C'}</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+------+---------+----------------+---------+--------------------+
+| D    | D(Easy) | D(Easy)        | D(Hard) | D(Hard)            |
++------+---------+----------------+---------+--------------------+
+| I    | I(Dumb) | I(Intelligent) | I(Dumb) | I(Intelligent)     |
++------+---------+----------------+---------+--------------------+
+| G(A) | 0.0     | 1.0            | 0.0     | 0.3333333333333333 |
++------+---------+----------------+---------+--------------------+
+| G(B) | 0.5     | 0.0            | 0.0     | 0.6666666666666666 |
++------+---------+----------------+---------+--------------------+
+| G(C) | 0.5     | 0.0            | 1.0     | 0.0                |
++------+---------+----------------+---------+--------------------+</code></pre>
+</div>
+</div>
+<p><strong>Structure Learning</strong> The most data-driven approach involves situations where even the network structure is unknown. The goal here is to discover the dependency relationships—the DAG itself—from the data. This is a more complex task known as structure learning or causal discovery. <code>pgmpy</code> provides several algorithms for this purpose [34, 44]:</p>
+<ul>
+<li><strong>Constraint-based Algorithms (e.g., <code>PC</code>):</strong> These algorithms work by performing a series of statistical tests for conditional independence on the data to identify which variables are (and are not) directly connected.[41, 44]</li>
+<li><strong>Score-based Algorithms (e.g., <code>HillClimbSearch</code>):</strong> These algorithms search through the space of possible DAGs, using a scoring function (like BIC or BDeu) to find the graph that best explains the data.[34]</li>
+</ul>
+<p>This powerful capability allows Bayesian Networks to be used not just for encoding what is already known, but as a tool for exploratory data analysis and discovering new, potentially causal relationships within a complex system.</p>
+<p>The journey from pure expert knowledge to purely data-driven discovery represents a continuum. A practitioner can start with a fully expert-defined model, use data to refine its parameters, or use data to discover the entire model from the ground up. The <code>pgmpy</code> library is expertly designed to support this entire workflow, making it an indispensable tool for anyone looking to apply probabilistic reasoning to complex problems.</p>
+</section>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>This tutorial has navigated the landscape of Bayesian statistics, from its core philosophical underpinnings to the practical construction of sophisticated models in Python. The journey began with the fundamental distinction between Bayesian and Frequentist thinking, establishing the Bayesian view of probability as a degree of belief that can be rationally updated via Bayes’ Theorem. This principle of belief-updating is the engine that drives the entire framework.</p>
+<p>It was then shown how Bayesian Networks scale this principle, using Directed Acyclic Graphs to represent the complex web of dependencies in a system. The DAG structure is not merely a visualization; it is a powerful assertion of conditional independencies that allows a massive joint probability distribution to be factorized into a set of small, manageable Conditional Probability Tables. This factorization is what makes modeling and inference computationally tractable.</p>
+<p>The practical implementation using <code>pgmpy</code> demonstrated how these abstract concepts translate into concrete code. By defining a network structure, meticulously constructing <code>TabularCPD</code> objects, and associating them with the model, a complete probabilistic representation of a system can be built. The final step, inference, unlocks the model’s predictive power, allowing for the calculation of posterior probabilities in light of new evidence.</p>
+<p>Ultimately, Bayesian Networks offer a uniquely powerful synthesis of domain knowledge and data-driven learning. They provide a transparent, interpretable, and extensible framework for reasoning under uncertainty. Whether building a model from expert opinion, learning its parameters from data, or discovering its very structure, the principles of Bayesian inference and the tools provided by libraries like <code>pgmpy</code> equip the modern developer and data scientist with a robust methodology for tackling the ambiguity inherent in the real world.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
